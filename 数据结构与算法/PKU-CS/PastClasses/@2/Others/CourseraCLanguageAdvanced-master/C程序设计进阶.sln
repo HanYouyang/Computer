@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CourseraCLanguageAdvanced", "C程序设计进阶\C程序设计进阶.vcxproj", "{23633D55-5121-4E58-8E0A-9D27533402AF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "编程练习1", "编程练习1\编程练习1.vcxproj", "{33A605C2-7424-4FA6-8E1F-9F6ADA8AAA08}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "递归编程练习", "递归编程练习\递归编程练习.vcxproj", "{CDDD46E8-290F-4D53-B84D-E0992E9F0659}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "指针与二维数组练习", "指针与二维数组练习\指针与二维数组练习.vcxproj", "{173F26B7-29D4-459B-AE88-B11C5D653935}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "综合编程练习2", "综合编程练习2\综合编程练习2.vcxproj", "{E472135C-B022-4050-8A08-B7D3D1C7B09A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "期末考试", "期末考试\期末考试.vcxproj", "{48868107-2BF5-4D89-A0F1-96C87AF88C03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CD17E38-5A46-4D7A-B8AD-EC5DD6F34430}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23633D55-5121-4E58-8E0A-9D27533402AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{23633D55-5121-4E58-8E0A-9D27533402AF}.Debug|Win32.Build.0 = Debug|Win32
+		{23633D55-5121-4E58-8E0A-9D27533402AF}.Release|Win32.ActiveCfg = Release|Win32
+		{23633D55-5121-4E58-8E0A-9D27533402AF}.Release|Win32.Build.0 = Release|Win32
+		{33A605C2-7424-4FA6-8E1F-9F6ADA8AAA08}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33A605C2-7424-4FA6-8E1F-9F6ADA8AAA08}.Debug|Win32.Build.0 = Debug|Win32
+		{33A605C2-7424-4FA6-8E1F-9F6ADA8AAA08}.Release|Win32.ActiveCfg = Release|Win32
+		{33A605C2-7424-4FA6-8E1F-9F6ADA8AAA08}.Release|Win32.Build.0 = Release|Win32
+		{CDDD46E8-290F-4D53-B84D-E0992E9F0659}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CDDD46E8-290F-4D53-B84D-E0992E9F0659}.Debug|Win32.Build.0 = Debug|Win32
+		{CDDD46E8-290F-4D53-B84D-E0992E9F0659}.Release|Win32.ActiveCfg = Release|Win32
+		{CDDD46E8-290F-4D53-B84D-E0992E9F0659}.Release|Win32.Build.0 = Release|Win32
+		{173F26B7-29D4-459B-AE88-B11C5D653935}.Debug|Win32.ActiveCfg = Debug|Win32
+		{173F26B7-29D4-459B-AE88-B11C5D653935}.Debug|Win32.Build.0 = Debug|Win32
+		{173F26B7-29D4-459B-AE88-B11C5D653935}.Release|Win32.ActiveCfg = Release|Win32
+		{173F26B7-29D4-459B-AE88-B11C5D653935}.Release|Win32.Build.0 = Release|Win32
+		{E472135C-B022-4050-8A08-B7D3D1C7B09A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E472135C-B022-4050-8A08-B7D3D1C7B09A}.Debug|Win32.Build.0 = Debug|Win32
+		{E472135C-B022-4050-8A08-B7D3D1C7B09A}.Release|Win32.ActiveCfg = Release|Win32
+		{E472135C-B022-4050-8A08-B7D3D1C7B09A}.Release|Win32.Build.0 = Release|Win32
+		{48868107-2BF5-4D89-A0F1-96C87AF88C03}.Debug|Win32.ActiveCfg = Debug|Win32
+		{48868107-2BF5-4D89-A0F1-96C87AF88C03}.Debug|Win32.Build.0 = Debug|Win32
+		{48868107-2BF5-4D89-A0F1-96C87AF88C03}.Release|Win32.ActiveCfg = Release|Win32
+		{48868107-2BF5-4D89-A0F1-96C87AF88C03}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

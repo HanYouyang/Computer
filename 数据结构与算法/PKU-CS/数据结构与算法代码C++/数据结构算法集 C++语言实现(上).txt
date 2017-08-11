@@ -1,0 +1,1340 @@
+数据结构算法集 C++语言实现(上)
+
+/////////////////////////// 
+//   // 
+//   堆栈数据结构   stack.h       // 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+
+template<class Type>class Stack; 
+
+template<class Type> 
+class StackNode 
+{ 
+friend class Stack<Type>; 
+private: 
+Type data; 
+StackNode<Type> *link; 
+  StackNode(Type D=0,StackNode<Type> *L=NULL):link(L),data(D){} 
+}; 
+
+template<class Type> 
+class Stack 
+{ 
+public: 
+Stack():top(NULL),NumItem(0){} 
+void Push(Type item); 
+Type Pop(); 
+Type GetTop(); 
+void MakeEmpty(); 
+bool ISEmpty(); 
+int GetNum(); 
+private: 
+int NumItem; 
+StackNode<Type> *top; 
+}; 
+
+template<class Type> 
+void Stack<Type>::Push(Type item) 
+{ 
+top=new StackNode<Type>(item,top); 
+NumItem++; 
+} 
+
+template<class Type> 
+Type Stack<Type>::Pop() 
+{ 
+StackNode<Type> *p; 
+Type temp; 
+temp=top->data; 
+p=top; 
+top=top->link; 
+delete p; 
+NumItem--; 
+return temp; 
+
+} 
+
+template<class Type> 
+Type Stack<Type>::GetTop() 
+{ 
+return top->data; 
+} 
+
+template<class Type> 
+bool Stack<Type>::ISEmpty() 
+{ 
+return top==NULL; 
+} 
+
+template<class Type> 
+void Stack<Type>::MakeEmpty() 
+{ 
+delete top; 
+} 
+
+template<class Type> 
+int Stack<Type>::GetNum() 
+{ 
+return NumItem; 
+}
+/////////////////////////// 
+//   // 
+//   队列数据结构     Queue.h // 
+//   // 
+////////////////////////// 
+#include<iostream.h> 
+
+template<class Type> class Queue; 
+
+template<class Type> class QueueNode 
+{ 
+friend class Queue<Type>; 
+private: 
+Type data; 
+QueueNode<Type> *link; 
+QueueNode(Type d=0,QueueNode *l=NULL):data(d),link(l){} 
+}; 
+
+template <class Type> class Queue 
+{ 
+public: 
+Queue():rear(NULL),front(NULL){} 
+~Queue(); 
+void EnQueue(Type item); 
+Type DelQueue(); 
+Type GetFront(); 
+void MakeEmpty(); 
+bool ISEmpty() { return front==NULL; } 
+private: 
+QueueNode<Type> *front,*rear; 
+}; 
+
+
+template<class Type> 
+Queue<Type>::~Queue() 
+{ 
+QueueNode<Type> *p; 
+while(front!=NULL) 
+{ 
+p=front; 
+front=front->link; 
+delete p; 
+} 
+} 
+
+template<class Type> 
+void Queue<Type>::EnQueue(Type item) 
+{ 
+if(front==NULL) 
+front=rear=new QueueNode<Type> (item,NULL); 
+else 
+rear=rear->link=new QueueNode<Type> (item,NULL); 
+} 
+
+
+template<class Type> 
+Type Queue<Type>::DelQueue() 
+{ 
+QueueNode<Type> *p=front; 
+Type temp=p->data;; 
+front=front->link; 
+delete p; 
+return temp; 
+} 
+
+
+template<class Type> 
+Type Queue<Type>::GetFront() 
+{ 
+return front->data; 
+} 
+
+
+template<class Type> 
+void Queue<Type>::MakeEmpty() 
+{ 
+QueueNode<Type> *p; 
+while(front!=NULL) 
+{ 
+p=front; 
+front=front->link; 
+delete p; 
+} 
+}
+/////////////////////////// 
+//   // 
+//   链表数据结构 list.h // 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+
+template<class type> 
+class list; 
+
+template<class type> 
+class listnode 
+{ 
+public: 
+friend class list<type>; 
+private: 
+type data; 
+listnode<type> * next; 
+}; 
+
+
+template<class type> 
+class list 
+{ 
+public: 
+list(); 
+~list(); 
+void insertend(type); //向链表尾部插入元素 
+bool insert(type,int); //向链表任意位置插入元素 
+void delnode(int i); //删除元素 
+int find(type T);   //查找元素 
+void makeempty();   //销毁链表 
+bool print(); //打印链表 
+int getlen(); //得到链表长度 
+private: 
+listnode<type> *first,*last; 
+int length; 
+}; 
+
+template<class type> 
+void initlist(type &tmp); 
+
+template<class type> 
+void list_exit(list<type> &L,type tmp); 
+
+void initation(); 
+
+template<class type> 
+void list_insertend(list<type> &L,type tmp); 
+
+
+template<class type> int list<type>::getlen() 
+{ 
+return length; 
+} 
+
+template<class type> void list<type>::makeempty() 
+{ 
+listnode<type> *p1,*p2; 
+
+p1=first->next; 
+first->next=NULL; 
+while(p1!=NULL) 
+{ 
+p2=p1; 
+p1=p1->next; 
+delete p2; 
+} 
+length=0;   
+} 
+
+template<class type> void list<type>::insertend(type t) 
+{ 
+
+listnode<type> *p; 
+p=new listnode<type>; 
+p->data=t; 
+p->next=NULL; 
+last->next=p; 
+last=p; 
+
+length++; 
+} 
+
+template<class type> bool list<type>::insert(type t,int i) 
+{ 
+listnode<type> *p; 
+p=first; 
+
+int k=1; 
+while(p!=NULL&&k<i) 
+{ 
+p=p->next; 
+k++; 
+} 
+if(p==NULL&&k!=i) 
+return false; 
+else 
+{ 
+  listnode<type> *tp; 
+tp=new listnode<type>; 
+tp->data=t; 
+tp->next=p->next; 
+p->next=tp; 
+length++; 
+  
+return true; 
+} 
+} 
+
+template<class type> void list<type>::delnode(int i) 
+{ 
+int k=1; 
+listnode<type> *p,*t; 
+p=first; 
+
+while(p->next!=NULL&&k!=i) 
+{ 
+p=p->next; 
+  k++; 
+} 
+t=p->next; 
+cout<<"你已经将数据项 "<<t->data<<"删除"<<endl; 
+
+p->next=p->next->next; 
+length--; 
+delete t; 
+} 
+
+template<class type> bool list<type>::print() 
+{ 
+listnode<type> *p=first->next; 
+if(length==0) 
+return false; 
+else 
+{ 
+cout<<"链表中有"<<length<<"项数据: "<<endl; 
+while(p) 
+{ 
+cout<<p->data<<" "; 
+p=p->next; 
+} 
+} 
+cout<<endl; 
+
+
+return true; 
+} 
+
+template<class type> int list<type>::find(type T) 
+{ 
+listnode<type> *p=first->next; 
+int i=1; 
+while(p&&p->data!=T) 
+{ 
+p=p->next; 
+i++; 
+} 
+if(p) 
+return i; 
+else 
+  return 0; 
+} 
+
+
+template<class type> list<type>::~list() 
+{ 
+delete first; 
+cout<<"欢迎再次使用 (!^!) "<<endl; 
+} 
+
+template<class type> list<type>::list() 
+{ 
+  listnode<type> *node=new listnode<type>; 
+node->next=NULL; 
+first=last=node; 
+length=0; 
+}
+/////////////////////////// 
+//   // 
+//   图数据结构 graph.h // 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+#include"Queue.h" 
+
+template<class NameType,class DisType>class Graph; 
+
+template<class NameType,class DisType> struct Node   
+{ 
+friend class Graph<NameType,DisType>; 
+int num; 
+DisType val; 
+Node<NameType,DisType> *next; 
+}; 
+
+template<class NameType,class DisType> struct GpNode 
+{ 
+friend class Graph<NameType,DisType>; 
+NameType data; 
+Node<NameType,DisType> *link; 
+}; 
+
+template<class NameType,class DisType> 
+class Graph 
+{ 
+public: 
+void Creat(); //创建图 
+void PrintNode();   //打印图中的各个数据项 
+void DFS();   //图的深度优先搜索,主过程 
+void DFS(int v,int visited[]); // 子过程 
+void BFS(); //图的广度优先搜索，主过程 
+void BFS(int v,int visited[]); //子过程 
+void ShortPath();   //求最短路径 
+private: 
+GpNode<NameType,DisType> *table; 
+Node<NameType,DisType> *p; 
+int NumNode;     //节点个数 
+}; 
+
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::Creat() 
+{ 
+do 
+{ 
+cout<<"请输入节点个数: "; 
+cin >> NumNode; 
+}while(NumNode<=0); 
+
+table=new GpNode<NameType,DisType>[NumNode]; 
+cout<<"请输入各节点数据项"<<endl; 
+for(int i=0;i<NumNode;i++) 
+{ 
+cin>>table.data; 
+table.link=NULL; 
+} 
+
+cout<<"请输入各边的关系 (如: A B)"<<endl; 
+i=1; 
+NameType nodeA,nodeB; 
+bool findA,findB; 
+char ISExit; 
+int m,n; 
+do 
+{ 
+findA=findB=false; 
+cout<<"请输入第"<<i<<"对边的关系"<<endl; 
+cin>>nodeA>>nodeB; 
+for(m=0,n=0;m<NumNode&&n<NumNode&&!(findA & findB);) //查找边的节点 
+{ 
+if(nodeA!=table[m].data) 
+m++; 
+else 
+findA=true; 
+if(nodeB!=table[n].data) 
+n++; 
+else 
+findB=true; 
+
+} 
+if(!(findA & findB)) 
+cout<<"输入的节点数据项有错误"<<endl; 
+else 
+{ 
+p=new Node<NameType,DisType>; 
+p->next=table[m].link; 
+p->num=n; 
+table[m].link=p; 
+cout<<"请输入该对边的权值: "; 
+cin>>p->val; 
+i++; 
+} 
+cout<<"是否继续输入: y)继续,X)任意键退出 "; 
+cin>>ISExit; 
+if(ISExit!='y'&&ISExit!='Y') 
+break; 
+
+}while(true); 
+  
+} 
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::PrintNode() 
+{ 
+cout<<"图中各节点数据项 : "; 
+for(int i=0;i<NumNode;i++) 
+  cout<<table.data<<" "; 
+cout<<endl; 
+} 
+
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::DFS() 
+{ 
+int *visited=new int[NumNode]; 
+cout<<"图的深度优先搜索 : "; 
+for(int i=0;i<NumNode;i++) 
+visited=0; 
+for(i=1;i<NumNode;i++) //遍厉孤立节点 
+DFS(i,visited); 
+delete []visited; 
+cout<<endl; 
+} 
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::DFS(int v,int visited[]) 
+{ 
+Node<NameType,DisType> *t; 
+if(visited[v]==0) 
+  cout<<table[v].data<<" "; 
+visited[v]=1; 
+t=table[v].link; 
+while(t!=NULL) 
+{ 
+if(visited[t->num]==0) 
+DFS(t->num,visited); 
+t=t->next; 
+} 
+} 
+
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::BFS() 
+{ 
+int *visited=new int[NumNode]; 
+cout<<"图的广度优先搜索 : "; 
+for(int i=0;i<NumNode;i++) 
+visited=0; 
+for( i=0;i<NumNode;i++) 
+  BFS(i,visited); 
+} 
+
+
+template<class NameType,class DisType> 
+void Graph<NameType,DisType>::BFS(int v,int visited[]) 
+{ 
+Queue<int> q; 
+int n; 
+if(visited[v]==0) 
+{ 
+visited[v]=1; 
+cout<<table[v].data<<" "; 
+q.EnQueue(v); 
+while(!q.ISEmpty()) 
+{ 
+n=q.DelQueue(); 
+p=table[n].link; 
+while(p!=NULL) 
+{ 
+n=p->num; 
+if(visited[n]==0) 
+{ 
+  cout<<table[n].data<<" "; 
+  visited[n]=1; 
+
+} 
+p=p->next; 
+} 
+
+} 
+} 
+
+}
+/////////////////////////// 
+//   // 
+// 排序算法数据结构 Compositor.h   // 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+
+
+template<class Type> 
+class Compositor 
+{ 
+public: 
+Compositor():sort(NULL){} 
+void Creat();   //创建排序数组 
+void Bubble(); //冒泡排序   
+void Insert(); //插入排序 
+//快速排序 
+void Quick();   
+void QSort(int,int); 
+int Partition(int low,int high); 
+//归并排序 
+void Merge(Type SR[],Type TR[],int i,int m,int n); 
+void Msort(Type SR[],Type TR1[],int s,int t); 
+  void MergeSort(); 
+//选择排序 
+void Select(); 
+void Print();   //打印排序后的结果 
+protected: 
+Type *sort; 
+int leng; 
+}; 
+
+template<class Type> 
+void Compositor<Type>::Creat() 
+{ 
+cout<<"输入你需要排序的数据个数: "; 
+cin>>leng; 
+while(leng<=0) 
+{ 
+cout<<"输入数据有误"; 
+cin>>leng; 
+} 
+sort=new Type[leng]; 
+cout<<"请输入各数据项："; 
+for(int i=0;i<leng;i++) 
+cin>>sort; 
+}   
+
+
+template<class Type> 
+void Compositor<Type>::Insert() 
+{ 
+Creat(); 
+Type temp; 
+  for(int i=1;i<leng;i++) 
+{ 
+if(sort<sort[i-1]) 
+{ 
+temp=sort; 
+for(int j=i-1;temp<sort[j]&&j>=0;j--) 
+{ 
+sort[j+1]=sort[j]; 
+} 
+sort[j+1]=temp; 
+} 
+} 
+Print(); 
+
+} 
+
+template<class Type> 
+void Compositor<Type>::Bubble() 
+{ 
+Creat(); 
+Type temp; 
+for(int i=leng-1;i>=0;i--) 
+{ 
+for(int j=0;j<leng-1;j++) 
+{ 
+if(sort[j]>sort[j+1]) 
+{ 
+temp=sort[j]; 
+sort[j]=sort[j+1]; 
+sort[j+1]=temp; 
+} 
+} 
+} 
+Print(); 
+} 
+
+template<class Type> 
+void Compositor<Type>::Quick() 
+{ 
+Creat(); 
+QSort(0,leng-1); 
+Print(); 
+} 
+
+template<class Type> 
+void Compositor<Type>::QSort(int s,int t) 
+{ 
+if(s<t-1) 
+{ 
+int pivotloc=Partition(s,t); 
+QSort(s,pivotloc-1); 
+QSort(pivotloc+1,t); 
+} 
+} 
+
+template<class Type> 
+int Compositor<Type>::Partition(int low,int high) 
+{ 
+  Type pivotkey=sort[low]; 
+while(low < high) 
+{ 
+while(low<high&&sort[high]>=pivotkey) 
+--high; 
+sort[low++]=sort[high]; 
+while(low<high&&sort[low]<=pivotkey) 
+++low; 
+sort[high--]=sort[low]; 
+}   
+sort[low]=pivotkey; 
+return low; 
+} 
+
+template<class Type> 
+void Compositor<Type>::MergeSort() 
+{ 
+Creat(); 
+Msort(sort,sort,0,leng-1); 
+Print(); 
+} 
+
+
+template<class Type> 
+void Compositor<Type>::Msort(Type SR[],Type TR1[],int s,int t) 
+{ 
+int m; 
+Type *TR2=new Type[t-s]; 
+if(s==t) TR1[s]=SR[s]; 
+else 
+{ 
+m=(t+s)/2; 
+Msort(SR,TR2,s,m); 
+Msort(SR,TR2,m+1,t); 
+Merge(TR2,TR1,s,m,t); 
+} 
+} 
+
+template<class Type> 
+void Compositor<Type>::Merge(Type SR[],Type TR[],int i,int m,int n) 
+{ 
+for(int j=m+1,k=i;i<=m&&j<=n;k++) 
+{ 
+if(SR<=SR[j]) 
+TR[k]=SR[i++]; 
+else 
+TR[k]=SR[j++]; 
+} 
+while(i<=m) 
+TR[k++]=SR[i++]; 
+while(j<=n) 
+TR[k++]=SR[j++]; 
+} 
+
+
+template<class Type> 
+void Compositor<Type>::Select() 
+{ 
+Creat(); 
+Type temp; 
+int t; 
+for(int i=0;i<leng;i++) 
+{ 
+t=i; 
+for(int j=i+1;j<leng;j++) 
+{ 
+if(sort[t]>sort[j]) 
+t=j; 
+} 
+if(t!=i) 
+{ 
+temp=sort[t]; 
+sort[t]=sort; 
+sort=temp; 
+} 
+} 
+Print(); 
+} 
+
+template<class Type> 
+void Compositor<Type>::Print() 
+{ 
+cout<<"排序结果为: "; 
+for(int i=0;i<leng;i++) 
+cout<<sort<<" "; 
+cout<<endl; 
+}
+/////////////////////////// 
+//   // 
+//   二叉树数据结构 BinTree.h     // 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+
+template<class Type>class BinTree; 
+
+template<class Type> 
+class TreeNode 
+{ 
+protected: 
+  friend class BinTree<Type>; 
+TreeNode():lchild(NULL),rchild(NULL){} 
+  Type data; 
+  TreeNode *lchild; //左，右子树 
+  TreeNode *rchild; 
+}; 
+
+template<class Type> 
+class BinTree 
+{ 
+friend void BinTree_PRE(BinTree<Type>& BinTreeOPP); //友元函数 
+friend void BinTree_INO(BinTree<Type>& BinTreeOPP); 
+friend void BinTree_POS(BinTree<Type>& BinTreeOPP); 
+friend void BinTree_Destroy(BinTree<Type>& BinTreeOPP); 
+public: 
+BinTree():root(NULL){} 
+void CreatTree();           //创建二叉树,主过程 
+void CreatTree(TreeNode<Type>* child,int k); //子过程 
+void PreTree(TreeNode<Type> *point);   //先序遍历二叉树 
+void InoTree(TreeNode<Type> *point); //中序遍历二叉树 
+void PosTree(TreeNode<Type> *point); //后序遍历二叉树 
+void Destroy(TreeNode<Type> *point);   //销毁二叉树 
+bool ISEmpty(); 
+protected: 
+TreeNode<Type>* root; 
+}; 
+
+
+template<class Type> 
+void BinTree<Type>::CreatTree() 
+{ 
+CreatTree(root,1); 
+} 
+
+template<class Type> 
+void BinTree<Type>::CreatTree(TreeNode<Type>* child,int k) 
+{ 
+TreeNode<Type>* point; 
+point=new TreeNode<Type>; 
+cout<<"输入节点数据项 :"; 
+cin>>point->data; 
+switch(k) 
+{ 
+case 1: root=point; break; 
+case 2: child->lchild=point;break; 
+case 3: child->rchild=point;break; 
+} 
+
+char temp; 
+cout<<"该"<<point->data<<"节点是否有左子树 Y / 任意键 :"; 
+cin>>temp; 
+if(temp=='y'||temp=='Y') 
+{ 
+  CreatTree(point,2); 
+} 
+
+cout<<"该"<<point->data<<"节点是否有右子树 Y / 任意键 :"; 
+cin>>temp; 
+if(temp=='y'||temp=='Y') 
+{ 
+CreatTree(point,3); 
+} 
+} 
+
+template<class Type> 
+void BinTree<Type>::PreTree(TreeNode<Type> *point) 
+{ 
+if(point!=NULL) 
+{ 
+cout<<" "<<point->data; 
+PreTree(point->lchild); 
+PreTree(point->rchild); 
+} 
+} 
+
+
+template<class Type> 
+void BinTree<Type>::InoTree(TreeNode<Type> *point) 
+{ 
+if(point!=NULL) 
+{ 
+  
+  InoTree(point->lchild); 
+cout<<" "<<point->data; 
+InoTree(point->rchild); 
+} 
+} 
+
+template<class Type> 
+void BinTree<Type>::PosTree(TreeNode<Type> *point) 
+{ 
+if(point!=NULL) 
+{ 
+  
+PosTree(point->lchild); 
+PosTree(point->rchild); 
+cout<<" "<<point->data; 
+} 
+} 
+
+
+template<class Type> 
+bool BinTree<Type>::ISEmpty() 
+{ 
+return root==NULL; 
+} 
+
+template<class Type> 
+void BinTree<Type>::Destroy(TreeNode<Type> *point) 
+{ 
+if(point!=NULL) 
+{ 
+Destroy(point->lchild); 
+Destroy(point->rchild); 
+delete point; 
+} 
+}
+/////////////////////////// 
+//   // 
+// 基本功能函数 BaseFun.h   // 
+//   // 
+////////////////////////// 
+
+void GRAPH(); 
+void LIST(); 
+void STACK(); 
+void QUEUE(); 
+void COMPOSITOR(); 
+void BINTREE(); 
+
+/////////////////////////// 
+//   // 
+//   堆栈功能函数   Stack.cpp/ / 
+//   // 
+////////////////////////// 
+
+
+
+#include"Stack.h" 
+#include"iostream.h" 
+
+
+const int INT =13; 
+const double FLOAT= 13.33; 
+const char CHAR ='a'; 
+
+
+
+
+template<class Type> 
+void Stack_Push(Stack<Type> &StackOPP) 
+{ 
+cout<<"请输入要插入的数据项: "; 
+Type item; 
+cin>>item; 
+StackOPP.Push(item); 
+} 
+
+template<class Type> 
+void Stack_Pop(Stack<Type> &StackOPP) 
+{ 
+if(!StackOPP.ISEmpty()) 
+{ 
+  cout<<"出栈数据项: "; 
+  cout<<StackOPP.Pop()<<endl; 
+} 
+else 
+{ 
+cout<<"堆栈已经为空!"<<endl; 
+} 
+} 
+
+template<class Type> 
+void Stack_ISEmpty(Stack<Type> &StackOPP) 
+{ 
+if(!StackOPP.ISEmpty()) 
+  cout<<"堆栈不空,还有"<<StackOPP.GetNum()<<"数据项!"<<endl; 
+else 
+cout<<"堆栈为空!"<<endl; 
+  
+} 
+
+template<class Type> 
+void Stack_GetTop(Stack<Type> &StackOPP) 
+{ 
+if(!StackOPP.ISEmpty()) 
+cout<<"栈顶元素为："<<StackOPP.GetTop()<<endl; 
+else 
+cout<<"堆栈为空!"<<endl; 
+} 
+
+template<class Type> 
+void Stack_MakeEmpty(Stack<Type> &StackOPP) 
+{ 
+if(!StackOPP.ISEmpty()) 
+{ 
+StackOPP.MakeEmpty(); 
+cout<<"堆栈已经销毁!"<<endl; 
+} 
+else 
+{ 
+cout<<"销毁失败!"<<endl; 
+} 
+} 
+
+
+template<class Type> 
+void StackINI(Type temp) 
+{ 
+Stack<Type> StackOPP; 
+
+do 
+{ 
+cout<<"堆栈的操作: "<<endl 
+<<" 1) 插入堆栈"<<endl 
+<<" 2) 出栈"<<endl 
+<<" 3) 堆栈是否为空"<<endl 
+<<" 4) 得栈顶数据项"<<endl 
+<<" 5) 销毁堆栈"<<endl 
+<<" X) 退出堆栈操作"<<endl; 
+int item; 
+cin>>item; 
+switch(item) 
+{ 
+case 1: Stack_Push(StackOPP); break; 
+case 2: Stack_Pop(StackOPP); break; 
+case 3: Stack_ISEmpty(StackOPP); break; 
+case 4: Stack_GetTop(StackOPP); break; 
+case 5: Stack_MakeEmpty(StackOPP); break; 
+
+default: return ; 
+} 
+
+}while(true); 
+
+
+} 
+
+
+void STACK() 
+{ 
+int item; 
+cout<<"清选择数据类型: 1) 整型 2) 浮点型 3) 字符型 X) 退出: "; 
+
+cin>>item; 
+switch(item) 
+{ 
+case 1: StackINI(INT); break; //根据不同的用户需要选择数据类型 
+case 2: StackINI(FLOAT); break; 
+case 3: StackINI(CHAR); break; 
+default: return ; break; 
+} 
+} 
+
+
+
+/////////////////////////// 
+//   // 
+//   队列功能函数 Queue.h // 
+//   // 
+////////////////////////// 
+
+
+
+#include"Queue.h" 
+
+const int INT =13; 
+const double FLOAT= 13.33; 
+const char CHAR ='a'; 
+
+
+
+template<class Type> 
+void Queue_Enter(Queue<Type> &QueueOPP) 
+{ 
+cout<<"请输入要插入队列的数据: "; 
+Type item; 
+cin>>item; 
+QueueOPP.EnQueue(item); 
+} 
+
+template<class Type> 
+void Queue_Del(Queue<Type> &QueueOPP) 
+{ 
+if(!QueueOPP.ISEmpty()) 
+{ 
+cout<<"出队数据:"<<QueueOPP.DelQueue()<<endl; 
+} 
+else 
+{ 
+cout<<"队列已为空!"<<endl; 
+} 
+} 
+
+template<class Type> 
+void Queue_ISEmpty(Queue<Type> &QueueOPP) 
+{ 
+if(QueueOPP.ISEmpty()) 
+{ 
+cout<<"队列已空!"<<endl; 
+} 
+else 
+{ 
+cout<<"队列不空!"<<endl; 
+} 
+} 
+
+
+template<class Type> 
+void Queue_GetFront(Queue<Type> &QueueOPP) 
+{ 
+if(!QueueOPP.ISEmpty()) 
+{ 
+cout<<"队头元素为: "<<QueueOPP.GetFront()<<endl; 
+} 
+else 
+{ 
+cout<<"队列已空!"<<endl; 
+} 
+} 
+
+template<class Type> 
+void Queue_MakeEmpty(Queue<Type> &QueueOPP) 
+{ 
+QueueOPP.MakeEmpty(); 
+cout<<"队列清空!"<<endl; 
+} 
+
+template<class Type> 
+void QueueINI(Type temp) 
+{ 
+Queue<Type> QueueOPP; 
+
+do 
+{ 
+cout<<"队列的操作: "<<endl 
+<<" 1) 插入队列"<<endl 
+<<" 2) 出队"<<endl 
+<<" 3) 队列是否为空"<<endl 
+<<" 4) 得队头数据项"<<endl 
+<<" 5) 销毁队列"<<endl 
+<<" X) 退出队列操作"<<endl; 
+int item; 
+cin>>item; 
+switch(item) 
+{ 
+case 1: Queue_Enter(QueueOPP); break; 
+case 2: Queue_Del(QueueOPP); break; 
+case 3: Queue_ISEmpty(QueueOPP); break; 
+case 4: Queue_GetFront(QueueOPP); break; 
+case 5: Queue_MakeEmpty(QueueOPP); break; 
+
+default: return ; 
+} 
+
+}while(true); 
+
+
+} 
+
+
+void QUEUE() //根据不同的用户需要选择数据类型 
+{ 
+int item; 
+cout<<"清选择数据类型: 1) 整型 2) 浮点型 3) 字符型 X) 退出: "; 
+
+
+cin>>item; 
+switch(item) 
+{ 
+case 1: QueueINI(INT); break;   
+case 2: QueueINI(FLOAT); break; 
+case 3: QueueINI(CHAR); break; 
+default: return ; break; 
+} 
+}
+
+
+/////////////////////////// 
+//   // 
+//   链表   List.h       // 
+//   // 
+////////////////////////// 
+
+
+#include"list.h" 
+#include<iostream.h> 
+#include<stdlib.h> 
+
+
+template<class type> 
+void initlist(type &tmp) 
+{ 
+list<type> List; 
+int n; 
+
+while(true) 
+{ 
+
+cout<<"请选择你要对链表进行的操作 "<<endl 
+<<"1) 在末尾插入数据"<<endl 
+  <<"2) 在任意处插入数据"<<endl 
+<<"3) 删除数据项"<<endl 
+<<"4) 删除整个链表"<<endl 
+<<"5) 打印链表"<<endl 
+<<"6) 查找数据项"<<endl 
+<<"7) 退出"<<endl; 
+
+cout<<">\ "; 
+cin>>n; 
+
+while(n<1||n>7) 
+{ 
+cout<<"输入有误，请从新输入!"<<endl; 
+  cout<<">\ "; 
+  cin>>n; 
+} 
+
+switch(n) 
+{ 
+case 1: list_insertend(List);break; 
+case 2: list_insert(List);break; 
+case 3: list_delnode(List);break; 
+case 4: list_makeempty(List);break; 
+case 5: list_print(List);break; 
+case 6: list_find(List);break; 
+case 7: return ;break; 
+} 
+
+} 
+
+} 
+
+void LIST() 
+{ 
+int n; 
+cout<<"请选择你要构造的链表的数据类型 1)整型，2)字符型,3)浮点型"<<endl;   
+cout<<">\ "; 
+cin>>n; 
+
+while(n<1||n>3) 
+{ 
+cout<<"输入有误，请从新输入!"<<endl; 
+  cout<<">\ "; 
+  cin>>n; 
+} 
+
+char t_c='c'; 
+int t_i=12; 
+double t_f=23.3; 
+
+switch(n) 
+{ 
+case 1:initlist(t_i);break; 
+case 2:initlist(t_c);break; 
+case 3:initlist(t_f);break; 
+} 
+} 
+
+template<class type> 
+void list_insertend(list<type> &L) 
+{ 
+type t; 
+cout<<"请输入插入数据: >\"; 
+cin>>t; 
+L.insertend(t); 
+} 
+
+template<class type> 
+void list_find(list<type> &L) 
+{ 
+type T; 
+cout<<"请输入你要查找的数据项：>\ "; 
+cin>>T; 
+
+int i; 
+if(!(i=L.find(T))) 
+cout<<"你要查找的数据项不存在!"<<endl; 
+else 
+cout<<"你要查找的数据项在第"<<i<<"个位置"<<endl; 
+} 
+
+template<class type> 
+void list_insert(list<type> &L) 
+{ 
+
+type t; 
+cout<<"请输入插入数据: >\"; 
+cin>>t; 
+
+int n; 
+cout<<"请输入插入位置: >\"; 
+cin>>n; 
+if(L.insert(t,n)) 
+cout<<"插入成功! 在"<<n<<"位置 插入"<<t<<endl; 
+else 
+cout<<"插入失败! 插入位置不正确!"<<endl; 
+
+} 
+
+template<class type> 
+void list_delnode(list<type>& L) 
+{ 
+int i; 
+cout<<"请输入要删除数据项的位置: >\"; 
+cin>>i; 
+
+
+while(i<1||i>L.getlen()) 
+{ 
+  cout<<"输入有误，可能大与链表长度,请从新输入!"<<endl; 
+  cout<<">\ "; 
+cin>>i; 
+} 
+
+L.delnode(i); 
+} 
+template<class type> 
+void list_makeempty(list<type> &L) 
+{ 
+L.makeempty(); 
+} 
+
+template<class type> 
+void list_print(list<type> &L) 
+{ 
+if(!L.print()) 
+cout<<"链表为空!"<<endl; 
+}
+/////////////////////////// 
+//   // 
+//   图功能函数 Graph.h   // 
+//   // 
+////////////////////////// 
+
+
+#include"Graph.h" 
+
+template<class NameType,class DisType> 
+void Graph_Creat(Graph<NameType,DisType> &GraphOPP) 
+{ 
+GraphOPP.Creat(); 
+} 
+
+template<class NameType,class DisType> 
+void Graph_DFS(Graph<NameType,DisType> &GraphOPP) 
+{ 
+GraphOPP.DFS(); 
+} 
+
+template<class NameType,class DisType> 
+void Graph_BFS(Graph<NameType,DisType> &GraphOPP) 
+{ 
+GraphOPP.BFS(); 
+} 
+
+template<class NameType,class DisType> 
+void Graph_PRINT(Graph<NameType,DisType> &GraphOPP) 
+{ 
+GraphOPP.PrintNode(); 
+} 
+
+
+void GRAPH() 
+{ 
+Graph<char,int> GraphOPP; 
+do 
+{ 
+cout<<"图的操作: "<<endl 
+<<" 1) 建立图"<<endl 
+<<" 2) 图的深度优先搜索"<<endl 
+<<" 3) 图的广度优先搜索"<<endl 
+<<" 4) 打印图中各结点"<<endl 
+<<" X) 退出排序操作"<<endl; 
+int item; 
+cin>>item; 
+switch(item) 
+{ 
+case 1: Graph_Creat(GraphOPP); break; 
+case 2: Graph_DFS(GraphOPP); break; 
+case 3: Graph_BFS(GraphOPP); break; 
+case 4: Graph_PRINT(GraphOPP); break; 
+default: return ; 
+} 
+
+}while(true); 
+
+
+}

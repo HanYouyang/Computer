@@ -1,0 +1,17 @@
+﻿生成启动时间为 2015/7/26 12:02:29。
+     1>项目“C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\计算导论A\计算导论A.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\developer\vs2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "数组逆序重放.cpp"
+         数组逆序重放.cpp
+       Link:
+         D:\developer\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\Debug\计算导论A.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\Debug\计算导论A.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\Debug\计算导论A.lib" /MACHINE:X86 "Debug\1的个数.obj"
+         "Debug\奇数求和.obj"
+         "Debug\数组逆序重放.obj"
+         "Debug\整数的个数.obj"
+         "Debug\晶晶赴约会.obj"
+         计算导论A.vcxproj -> C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\Debug\计算导论A.exe
+     1>已完成生成项目“C:\Users\chenguang\documents\visual studio 2013\Projects\计算导论A\计算导论A\计算导论A.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.75

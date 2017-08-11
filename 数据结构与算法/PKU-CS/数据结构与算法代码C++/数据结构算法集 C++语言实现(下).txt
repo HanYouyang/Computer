@@ -1,0 +1,275 @@
+数据结构算法集 C++语言实现(下)
+
+/////////////////////////// 
+//   // 
+// 排序算法功能函数   Compositor.cpp // 
+//   // 
+////////////////////////// 
+
+
+
+#include"Compositor.h" 
+
+
+const int INT =13; 
+const double FLOAT= 13.33; 
+const char CHAR ='a'; 
+
+template<class type> 
+void CompositorINI(type temp) 
+{ 
+Compositor<type> CompositorOPP; 
+
+do 
+{ 
+cout<<"排序的操作: "<<endl 
+<<" 1) 插入排序"<<endl 
+<<" 2) 快速排序"<<endl 
+<<" 3) 归并排序"<<endl 
+<<" 4) 冒泡排序"<<endl 
+<<" 5) 选择排序"<<endl 
+<<" X) 退出排序操作"<<endl 
+<<"请选择相应的操作: "; 
+int item; 
+cin>>item; 
+switch(item) 
+{ 
+case 1: Compositor_Insert(CompositorOPP); break; 
+case 2: Compositor_Quick(CompositorOPP); break; 
+case 3: Compositor_Merge(CompositorOPP); break; 
+case 4: Compositor_Bubble(CompositorOPP); break; 
+case 5: Compositor_Select(CompositorOPP); break; 
+
+default: return ; 
+} 
+
+}while(true); 
+
+
+} 
+
+void COMPOSITOR()//根据不同的用户需要选择数据类型 
+{ 
+int item; 
+cout<<"清选择数据类型: 1) 整型 2) 浮点型 3) 字符型 X) 退出: "; 
+
+
+cin>>item; 
+switch(item) 
+{ 
+case 1: CompositorINI(INT); break;   
+case 2: CompositorINI(FLOAT); break; 
+case 3: CompositorINI(CHAR); break; 
+default: return ; break; 
+} 
+} 
+
+template<class type> 
+void Compositor_Insert(Compositor<type> CompositorOPP) 
+{ 
+CompositorOPP.Insert(); 
+} 
+
+template<class type> 
+void Compositor_Quick(Compositor<type> CompositorOPP) 
+{ 
+CompositorOPP.Quick(); 
+} 
+
+template<class type> 
+void Compositor_Select(Compositor<type> CompositorOPP) 
+{ 
+CompositorOPP.Select(); 
+} 
+
+template<class type> 
+void Compositor_Merge(Compositor<type> CompositorOPP) 
+{ 
+CompositorOPP.MergeSort(); 
+} 
+
+
+template<class type> 
+void Compositor_Bubble(Compositor<type> CompositorOPP) 
+{ 
+CompositorOPP.Bubble(); 
+}
+/////////////////////////// 
+//   // 
+//   二叉树功能函数 BinTree.cpp// 
+//   // 
+////////////////////////// 
+
+
+#include<iostream.h> 
+#include"BinTree.h" 
+
+const int INT =13; 
+const double FLOAT= 13.33; 
+const char CHAR ='a'; 
+
+
+
+template<class Type> 
+void BinTree_CREAT(BinTree<Type>& BinTreeOPP) 
+{ 
+  BinTreeOPP. CreatTree(); 
+} 
+
+template<class Type> 
+void BinTree_PRE(BinTree<Type>& BinTreeOPP) 
+{ 
+if(!BinTreeOPP.ISEmpty()) 
+{ 
+  cout<<"先序遍历二叉树 : "; 
+  BinTreeOPP. PreTree(BinTreeOPP.root); 
+} 
+else 
+{ 
+cout<<"二叉树已经为空!"<<endl; 
+} 
+} 
+
+template<class Type> 
+void BinTree_INO(BinTree<Type>& BinTreeOPP) 
+{ 
+if(!BinTreeOPP.ISEmpty()) 
+{ 
+  cout<<"中序遍历二叉树 : "; 
+BinTreeOPP. InoTree(BinTreeOPP.root); 
+} 
+else 
+{ 
+cout<<"二叉树已经为空!"<<endl; 
+} 
+
+} 
+
+template<class Type> 
+void BinTree_POS(BinTree<Type>& BinTreeOPP) 
+{ 
+if(!BinTreeOPP.ISEmpty()) 
+{ 
+cout<<"后序遍历二叉树 : "; 
+BinTreeOPP. PosTree(BinTreeOPP.root); 
+} 
+else 
+{ 
+cout<<"二叉树已经为空!"<<endl; 
+} 
+} 
+
+template<class Type> 
+void BinTree_Destroy(BinTree<Type>& BinTreeOPP) 
+{ 
+BinTreeOPP.Destroy(BinTreeOPP.root); 
+BinTreeOPP.root=NULL; 
+cout<<"二叉树已经销毁!"<<endl; 
+} 
+
+template<class Type> 
+void BinTree_THREAD(BinTree<Type>& BinTreeOPP) 
+{ 
+if(BinTreeOPP.ISThread()) 
+{ 
+cout<<"该二叉树已经线索化!!"<<endl; 
+} 
+else 
+{ 
+BinTreeOPP.ThreadTree(); 
+} 
+} 
+
+template<class Type> 
+void BinTree_THROUGH(BinTree<Type>& BinTreeOPP) 
+{ 
+BinTreeOPP.Through(); 
+} 
+
+
+template<class Type> 
+void BinTreeINI(Type temp) 
+{ 
+BinTree<Type> BinTreeOPP; 
+
+do 
+{ 
+cout<<"树的操作: "<<endl 
+<<" 1) 构造二叉数"<<endl 
+<<" 2) 先序遍历二叉树"<<endl 
+<<" 3) 中序遍历二叉树"<<endl 
+<<" 4) 后序遍历二叉树"<<endl 
+<<" 5) 销毁二叉树 "<<endl 
+<<" X) 退出二叉树操作"<<endl; 
+int item; 
+cin>>item; 
+switch(item) 
+{ 
+case 1: BinTree_CREAT(BinTreeOPP); break; //构造二叉数 
+case 2: BinTree_PRE(BinTreeOPP); break; //先序遍历二叉树 
+case 3: BinTree_INO(BinTreeOPP); break; //中序遍历二叉树 
+case 4: BinTree_POS(BinTreeOPP); break;   //后序遍历二叉树 
+case 5: BinTree_Destroy(BinTreeOPP);break;   //求树的深度 
+default: return ; 
+} 
+
+}while(true); 
+
+
+} 
+
+void BINTREE() 
+{ 
+int item; 
+cout<<"清选择数据类型: 1) 整型 2) 浮点型 3) 字符型 X) 退出: "; 
+
+
+cin>>item; 
+switch(item) 
+{ 
+case 1: BinTreeINI(INT); break; //根据不同的用户需要选择数据类型 
+case 2: BinTreeINI(FLOAT); break; 
+case 3: BinTreeINI(CHAR); break; 
+default: return ; break; 
+} 
+}
+/////////////////////////// 
+//   // 
+//   主函数 index.cpp 用户菜单 // 
+//   // 
+////////////////////////// 
+
+
+#include <iostream.h> 
+#include"BaseFun.h" 
+
+void main() 
+{ 
+//功能菜单 
+do 
+{ 
+cout<<"欢迎使用数据结构算法集"<<endl 
+<<"1) 线性表 "<<endl 
+<<"2) 堆栈 "<<endl 
+<<"3) 队列 "<<endl 
+<<"4) 二叉树 "<<endl 
+<<"5) 图 "<<endl 
+<<"6) 排序算法 "<<endl 
+<<"7) 字符串 "<<endl 
+<<"X) 按任意键退出 "<<endl; 
+cout<<" 请您选择何种数据结构的操作："<<endl; 
+int kind; 
+cin>>kind; 
+switch(kind) 
+{ 
+case 1: LIST(); break; 
+case 2: STACK(); break; 
+case 3: QUEUE(); break; 
+case 4: BINTREE(); break; 
+case 5: GRAPH(); break; 
+case 6: COMPOSITOR(); break; 
+default: return; 
+} 
+}while(true); 
+
+}
